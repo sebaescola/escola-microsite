@@ -1,0 +1,1609 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digitale Verwaltung für Schulen – Kostenloses Webinar | Escola</title>
+  <meta name="description" content="In unserem kostenlosen Webinar zeigen wir euch, wie ihr eure Schulverwaltungs-Prozesse effizienter gestalten könnt. Jetzt anmelden!">
+
+  <!-- Fonts — Nunito (Escola self-hosts; this mirrors the same family) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ══════════════════════════════════════════════════════════════
+       DESIGN TOKENS  (sourced from escola.ch/css/escola-page.css
+       and harmonised with figma node 3065:4705 style declarations)
+       ══════════════════════════════════════════════════════════════ */
+    :root {
+      /* ── Colour ─────────────────────────────────────── */
+      --color-primary:        #0083DB;
+      --color-primary-dark:   #006CB5;
+      --color-primary-mid:    #007FE7;
+      --color-light-40:       #50B9FF;
+      --color-light-70:       #A8DCFF;
+      --color-card-bg:        #EAF7FF;
+
+      --color-bg:             #FFFFFF;
+      --color-bg-alt:         #F0F8FF;   /* "Keine Zeit" section */
+      --color-bg-footer:      #0083DB;
+
+      --color-text:           #333333;
+      --color-text-medium:    #494949;
+      --color-text-muted:     #666666;
+      --color-text-on-dark:   #FFFFFF;
+      --color-text-brand:     #0083DB;
+
+      --color-border:         #E5E5E5;
+      --color-border-input:   #C2C2C2;
+      --color-error:          #FE5F55;
+
+      /* ── Typography ─────────────────────────────────── */
+      --font-body: 'Nunito', sans-serif;
+
+      /* Figma token values (from style output) */
+      --heading-xl-size:       40px;
+      --heading-xl-lh:         48px;
+      --heading-h2-size:       32px;
+      --heading-h2-lh:         56px;
+      --heading-h3-size:       24px;
+      --heading-h3-lh:         40px;
+      --para-base-plus-size:   16px;
+      --para-base-plus-lh:     24px;
+      --para-base-size:        14px;
+      --para-base-lh:          24px;
+      --body-size:             16px;
+      --body-lh:               28px;
+      --body-small-size:       14px;
+      --body-small-lh:         25px;
+
+      /* ── Spacing ─────────────────────────────────────── */
+      --sp-1:  4px;
+      --sp-2:  8px;
+      --sp-3:  12px;
+      --sp-4:  16px;
+      --sp-5:  20px;
+      --sp-6:  24px;
+      --sp-8:  32px;
+      --sp-10: 40px;
+      --sp-12: 48px;
+      --sp-15: 60px;
+      --sp-20: 80px;
+      --nav-h: 80px;
+
+      /* ── Radius ──────────────────────────────────────── */
+      --r-xs:  6px;    /* buttons (Figma) */
+      --r-sm:  8px;    /* escola base cards */
+      --r-md:  12px;
+      --r-lg:  16px;   /* testimonial cards (Figma) */
+      --r-pill: 9999px;
+
+      /* ── Shadow ──────────────────────────────────────── */
+      --shadow-nav:  0 5px 50px 0 rgba(0,0,0,0.10);
+      --shadow-btn:  0 16px 40px -23px #000;
+      --shadow-card: 0px 73px 29px 0 rgba(0,0,0,0.01),
+                     0px 41px 25px 0 rgba(0,0,0,0.03),
+                     0px 18px 18px 0 rgba(0,0,0,0.05),
+                     0px  5px 10px 0 rgba(0,0,0,0.06);
+
+      /* ── Motion ──────────────────────────────────────── */
+      --dur-fast:   200ms;
+      --dur-base:   300ms;
+      --dur-slow:   500ms;
+      --ease:       cubic-bezier(0.645, 0.045, 0.355, 1);
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       BASE RESET
+       ══════════════════════════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      line-height: var(--body-lh);
+      font-weight: 400;
+      color: var(--color-text);
+      background: var(--color-bg);
+      -webkit-hyphens: manual;
+      hyphens: manual;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img, svg { display: block; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+    ul[role="list"] { list-style: none; }
+    blockquote { font-style: normal; }
+
+    /* ══════════════════════════════════════════════════════════════
+       TYPOGRAPHY UTILITIES
+       ══════════════════════════════════════════════════════════════ */
+    .t-h1 {
+      font-size: var(--heading-xl-size);
+      line-height: var(--heading-xl-lh);
+      font-weight: 700;
+    }
+    .t-h2 {
+      font-size: var(--heading-h2-size);
+      line-height: var(--heading-h2-lh);
+      font-weight: 700;
+      color: var(--color-text);
+    }
+    .t-h3 {
+      font-size: var(--heading-h3-size);
+      line-height: var(--heading-h3-lh);
+      font-weight: 700;
+      color: var(--color-text);
+    }
+    .t-body-lg {
+      font-size: var(--para-base-plus-size);
+      line-height: var(--para-base-plus-lh);
+      font-weight: 400;
+    }
+    .t-body {
+      font-size: var(--body-size);
+      line-height: var(--body-lh);
+      font-weight: 400;
+    }
+    .t-small {
+      font-size: var(--body-small-size);
+      line-height: var(--body-small-lh);
+      font-weight: 400;
+    }
+    .t-centre { text-align: center; }
+    .t-brand  { color: var(--color-primary); }
+
+    /* ══════════════════════════════════════════════════════════════
+       LAYOUT
+       ══════════════════════════════════════════════════════════════ */
+    .container {
+      max-width: 1260px;
+      margin: 0 auto;
+      padding: 0 var(--sp-20);
+    }
+    .container--narrow {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 0 var(--sp-10);
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       BUTTONS
+       ══════════════════════════════════════════════════════════════ */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--sp-2);
+      height: 40px;               /* --space/3xl from Figma */
+      padding: var(--sp-2) var(--sp-4);
+      border-radius: var(--r-xs);
+      font-family: var(--font-body);
+      font-size: var(--para-base-plus-size);
+      font-weight: 700;
+      line-height: var(--para-base-plus-lh);
+      letter-spacing: 0px;
+      white-space: nowrap;
+      text-decoration: none;
+      cursor: pointer;
+      transition:
+        background-color var(--dur-fast) var(--ease),
+        border-color     var(--dur-fast) var(--ease),
+        box-shadow       var(--dur-fast) var(--ease),
+        transform        var(--dur-fast) var(--ease);
+    }
+    .btn:focus-visible {
+      outline: 3px solid var(--color-light-40);
+      outline-offset: 2px;
+    }
+    .btn--primary {
+      background: var(--color-primary);
+      color: #fff;
+      border: 1px solid transparent;
+    }
+    .btn--primary:hover {
+      background: var(--color-primary-dark);
+      box-shadow: 0 6px 20px rgba(0,131,219,0.28);
+    }
+    .btn--primary:active { transform: scale(0.98); }
+
+    .btn--outline {
+      background: #fff;
+      color: var(--color-primary);
+      border: 1px solid var(--color-border);
+    }
+    .btn--outline:hover {
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 1px var(--color-primary);
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       NAVBAR
+       ══════════════════════════════════════════════════════════════ */
+    .navbar {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 400;
+      height: var(--nav-h);
+      background: #fff;
+      box-shadow: var(--shadow-nav);
+    }
+    .navbar__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+      max-width: 1260px;
+      margin: 0 auto;
+      padding: 0 var(--sp-10);
+    }
+    .navbar__logo {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .navbar__logo-mark {
+      width: 31px;
+      height: 31px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .navbar__logo-text {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--color-primary);
+      line-height: 1;
+    }
+
+    .navbar__links {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      gap: 0;
+    }
+    .navbar__link {
+      display: block;
+      padding: 30px var(--sp-4);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--color-text);
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+      transition: color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+    }
+    .navbar__link:hover,
+    .navbar__link[aria-current="page"] {
+      color: var(--color-primary);
+      box-shadow: inset 0 4px 0 0 var(--color-primary);
+    }
+
+    .navbar__actions {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-3);
+      flex-shrink: 0;
+    }
+    .navbar__login {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      height: 36px;
+      padding: 6px var(--sp-4);
+      border-radius: var(--r-xs);
+      border: 1px solid var(--color-border);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--color-primary);
+      background: #fff;
+      white-space: nowrap;
+      transition: border-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+    }
+    .navbar__login:hover {
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 1px var(--color-primary);
+    }
+
+    /* Hamburger */
+    .navbar__hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      padding: var(--sp-2);
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    .navbar__hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--color-text);
+      border-radius: 2px;
+      transform-origin: center;
+      transition: transform var(--dur-base) var(--ease), opacity var(--dur-base) var(--ease);
+    }
+    .navbar__hamburger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .navbar__hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .navbar__hamburger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile nav drawer */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      inset: var(--nav-h) 0 0 0;
+      background: #fff;
+      z-index: 300;
+      overflow-y: auto;
+      padding: var(--sp-6) var(--sp-6) var(--sp-10);
+      flex-direction: column;
+      gap: 0;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
+    .mobile-nav.is-open { display: flex; }
+    .mobile-nav__link {
+      display: block;
+      padding: var(--sp-4) 0;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--color-text);
+      border-bottom: 1px solid var(--color-border);
+      transition: color var(--dur-fast) var(--ease);
+    }
+    .mobile-nav__link:hover { color: var(--color-primary); }
+    .mobile-nav__cta { margin-top: var(--sp-6); }
+
+    /* ══════════════════════════════════════════════════════════════
+       HERO
+       ══════════════════════════════════════════════════════════════ */
+    .hero {
+      padding-top: var(--nav-h);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      min-height: 620px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Left column */
+    .hero__content {
+      padding: 80px 60px 80px 80px;
+    }
+    .hero__eyebrow {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+      margin-bottom: var(--sp-5);
+    }
+    .hero__eyebrow-dot {
+      width: 10px;
+      height: 10px;
+      background: var(--color-primary);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .hero__eyebrow-text {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--color-primary);
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+    .hero__title {
+      font-size: var(--heading-xl-size);
+      line-height: var(--heading-xl-lh);
+      font-weight: 700;
+      color: var(--color-text);
+      margin-bottom: var(--sp-5);
+    }
+    .hero__body {
+      font-size: var(--para-base-plus-size);
+      line-height: var(--para-base-plus-lh);
+      font-weight: 400;
+      color: var(--color-text);
+      margin-bottom: var(--sp-3);
+    }
+    .hero__body + .hero__body { margin-top: var(--sp-3); }
+    .hero__actions {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-3);
+      flex-wrap: wrap;
+      margin-top: var(--sp-6);
+    }
+
+    /* Right column — illustration */
+    .hero__visual {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      min-height: 520px;
+      padding: var(--sp-10);
+    }
+    .hero__visual-inner {
+      position: relative;
+      width: 100%;
+      max-width: 440px;
+    }
+    .hero__illustration {
+      width: 100%;
+      height: auto;
+      animation: heroFloat 5s ease-in-out infinite;
+      position: relative;
+      z-index: 2;
+    }
+    @keyframes heroFloat {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-12px); }
+    }
+    .hero__scribble {
+      position: absolute;
+      top: -20px;
+      right: -30px;
+      width: 180px;
+      opacity: 0.7;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .hero__floating-btn {
+      position: absolute;
+      right: -60px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      box-shadow: 0 8px 24px rgba(0,131,219,0.35);
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       WEBINAR-INFOS
+       ══════════════════════════════════════════════════════════════ */
+    .webinar-info {
+      padding: var(--sp-20) 0;
+      background: var(--color-bg);
+    }
+    .webinar-info__head {
+      text-align: center;
+      margin-bottom: var(--sp-15);
+    }
+    .webinar-info__split {
+      display: flex;
+      justify-content: center;
+      gap: 100px;
+      flex-wrap: wrap;
+      margin-bottom: var(--sp-15);
+    }
+    .webinar-info__col {
+      width: 290px;
+      text-align: center;
+    }
+    .webinar-info__col-title {
+      font-size: var(--heading-h3-size);
+      line-height: var(--heading-h3-lh);
+      font-weight: 700;
+      color: var(--color-text);
+      margin-bottom: var(--sp-4);
+    }
+    .webinar-info__dates {
+      font-size: var(--body-size);
+      line-height: var(--body-lh);
+      color: var(--color-text);
+    }
+    .webinar-info__dates strong { font-weight: 700; }
+    .webinar-info__dates .oder {
+      margin: 2px 0;
+      color: var(--color-text-medium);
+    }
+    .webinar-info__topics-wrap {
+      max-width: 440px;
+      margin: 0 auto;
+    }
+    .webinar-info__topics-title {
+      font-size: var(--heading-h3-size);
+      line-height: var(--heading-h3-lh);
+      font-weight: 700;
+      color: var(--color-text);
+      text-align: center;
+      margin-bottom: var(--sp-4);
+    }
+    .webinar-info__topics { list-style: none; }
+    .webinar-info__topic {
+      padding: 10px 0;
+      font-size: var(--body-size);
+      line-height: var(--body-lh);
+      font-weight: 400;
+      color: var(--color-text);
+      border-bottom: 1px solid var(--color-border);
+      text-align: left;
+    }
+    .webinar-info__topic:last-child { border-bottom: none; }
+    .webinar-info__topic small {
+      font-size: 12px;
+      color: var(--color-text-muted);
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       REVIEWS
+       ══════════════════════════════════════════════════════════════ */
+    .reviews {
+      position: relative;
+      padding: 80px 0 100px;
+      overflow: hidden;
+    }
+    .reviews__bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .reviews--flipped .reviews__bg {
+      transform: scaleY(-1);
+    }
+    .reviews__grid {
+      position: relative;
+      z-index: 2;
+      max-width: 1260px;
+      margin: 0 auto;
+      padding: 0 var(--sp-10);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--sp-8);
+      align-items: start;
+    }
+
+    /* Testimonial card */
+    .testimonial {
+      background: #fff;
+      border-radius: var(--r-lg);
+      padding: var(--sp-6) var(--sp-6) var(--sp-8);
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-4);
+    }
+    .testimonial--lower {
+      margin-top: var(--sp-20);   /* stagger offset — mirrors Figma absolute positioning */
+    }
+    .testimonial__header {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-4);
+    }
+    .testimonial__avatar {
+      width: 67px;
+      height: 67px;
+      border-radius: var(--r-pill);
+      object-fit: cover;
+      border: 1px solid var(--color-border);
+      flex-shrink: 0;
+    }
+    .testimonial__meta { display: flex; flex-direction: column; gap: 2px; }
+    .testimonial__name {
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 28px;
+      color: var(--color-primary);
+    }
+    .testimonial__role {
+      font-size: var(--body-small-size);
+      font-weight: 400;
+      line-height: var(--body-small-lh);
+      color: var(--color-text-muted);
+    }
+    .testimonial__quote {
+      font-size: var(--para-base-plus-size);
+      font-weight: 400;
+      line-height: var(--para-base-plus-lh);
+      color: #000;
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       KEINE ZEIT (ALTERNATIVES)
+       ══════════════════════════════════════════════════════════════ */
+    .alternatives {
+      background: var(--color-bg-alt);
+      padding: var(--sp-20) 0;
+    }
+    .alternatives__head {
+      text-align: center;
+      margin-bottom: var(--sp-15);
+    }
+    .alternatives__head .t-h2 { margin-bottom: 0; }
+    .alternatives__sub {
+      font-size: var(--heading-h3-size);
+      line-height: var(--heading-h3-lh);
+      font-weight: 700;
+      color: var(--color-text);
+      display: block;
+      margin-top: var(--sp-2);
+    }
+    .alternatives__grid {
+      display: flex;
+      justify-content: center;
+      gap: var(--sp-15);
+      flex-wrap: wrap;
+    }
+    .alternatives__card {
+      width: 360px;
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--sp-5);
+      text-align: center;
+    }
+    .alternatives__card-title {
+      font-size: var(--body-size);
+      font-weight: 700;
+      line-height: var(--body-lh);
+      color: var(--color-text);
+    }
+    .alternatives__card-body {
+      font-size: var(--body-size);
+      font-weight: 400;
+      line-height: var(--body-lh);
+      color: var(--color-text);
+      flex: 1;
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       ANMELDUNG (REGISTRATION)
+       ══════════════════════════════════════════════════════════════ */
+    .registration {
+      padding: var(--sp-20) 0;
+      background: var(--color-bg);
+    }
+    .registration__inner {
+      max-width: 870px;
+      margin: 0 auto;
+      padding: 0 var(--sp-10);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--sp-15);
+    }
+    .registration__title { text-align: center; }
+    .registration__form-area {
+      width: 100%;
+      min-height: 547px;
+    }
+    .registration__embed {
+      width: 100%;
+      height: 547px;
+      border: none;
+      border-radius: var(--r-md);
+      display: block;
+    }
+    /* Placeholder shown when no embed URL is set */
+    .registration__placeholder {
+      width: 100%;
+      min-height: 547px;
+      background: rgba(217, 217, 217, 0.20);
+      border-radius: var(--r-md);
+      border: 2px dashed var(--color-border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--sp-3);
+      padding: var(--sp-8);
+    }
+    .registration__placeholder-label {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--color-text-muted);
+    }
+    .registration__placeholder-hint {
+      font-size: 13px;
+      color: var(--color-text-muted);
+      text-align: center;
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       FOOTER  (completing the Figma #f7f7f7 placeholder)
+       ══════════════════════════════════════════════════════════════ */
+    .footer {
+      background: var(--color-bg-footer);
+      padding: var(--sp-15) 0 var(--sp-8);
+    }
+    .footer__inner {
+      max-width: 1260px;
+      margin: 0 auto;
+      padding: 0 var(--sp-10);
+    }
+    .footer__grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1.2fr 1.2fr;
+      gap: var(--sp-10);
+      margin-bottom: var(--sp-12);
+    }
+
+    /* Logo block */
+    .footer__logo {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+      margin-bottom: var(--sp-4);
+    }
+    .footer__logo-mark {
+      width: 31px;
+      height: 31px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.20);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .footer__logo-text {
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .footer__address {
+      font-size: var(--body-small-size);
+      line-height: 22px;
+      color: rgba(255,255,255,0.80);
+      font-style: normal;
+    }
+    .footer__contact {
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-2);
+      margin-top: var(--sp-3);
+    }
+    .footer__contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: var(--body-small-size);
+      line-height: 22px;
+      color: var(--color-light-70);
+      transition: color var(--dur-fast) ease;
+    }
+    .footer__contact-link:hover { color: #fff; text-decoration: underline; }
+
+    /* Nav column */
+    .footer__col-title {
+      font-size: var(--body-size);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: var(--sp-4);
+    }
+    .footer__links { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .footer__link {
+      font-size: var(--body-small-size);
+      line-height: 22px;
+      color: var(--color-light-70);
+      transition: color var(--dur-fast) ease;
+    }
+    .footer__link:hover { color: #fff; text-decoration: underline; }
+
+    /* Social icons */
+    .footer__social {
+      display: flex;
+      gap: var(--sp-2);
+      margin-top: var(--sp-4);
+    }
+    .footer__social-link {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      flex-shrink: 0;
+      transition: background var(--dur-fast) ease;
+    }
+    .footer__social-link:hover { background: rgba(255,255,255,0.30); }
+
+    /* Bottom bar */
+    .footer__bottom {
+      border-top: 1px solid rgba(255,255,255,0.15);
+      padding-top: var(--sp-6);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--sp-4);
+    }
+    .footer__copyright {
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+    }
+    .footer__legal {
+      display: flex;
+      gap: var(--sp-6);
+      list-style: none;
+      flex-wrap: wrap;
+    }
+    .footer__legal-link {
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+      transition: color var(--dur-fast) ease;
+    }
+    .footer__legal-link:hover { color: #fff; }
+    .footer__swiss {
+      font-size: 12px;
+      color: rgba(255,255,255,0.45);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       SCROLL-REVEAL ANIMATIONS
+       ══════════════════════════════════════════════════════════════ */
+    [data-animate] {
+      opacity: 0;
+      transform: translateY(24px);
+      transition:
+        opacity  var(--dur-slow) var(--ease),
+        transform var(--dur-slow) var(--ease);
+    }
+    [data-animate].is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Staggered children */
+    [data-animate-stagger] > * {
+      opacity: 0;
+      transform: translateY(20px);
+      transition:
+        opacity   0.5s var(--ease),
+        transform 0.5s var(--ease);
+    }
+    [data-animate-stagger].is-visible > *:nth-child(1) { transition-delay: 0ms; }
+    [data-animate-stagger].is-visible > *:nth-child(2) { transition-delay: 120ms; }
+    [data-animate-stagger].is-visible > *:nth-child(3) { transition-delay: 240ms; }
+    [data-animate-stagger].is-visible > *:nth-child(4) { transition-delay: 360ms; }
+    [data-animate-stagger].is-visible > * {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Reduced motion — honour user preference */
+    @media (prefers-reduced-motion: reduce) {
+      [data-animate],
+      [data-animate-stagger] > * {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+      .hero__illustration { animation: none; }
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       RESPONSIVE
+       ══════════════════════════════════════════════════════════════ */
+    @media (max-width: 1100px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero__content { padding: 80px var(--sp-10) var(--sp-10); max-width: 700px; }
+      .hero__visual { display: none; }
+      .footer__grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 900px) {
+      .webinar-info__split { gap: var(--sp-10); }
+      .reviews__grid { grid-template-columns: 1fr; }
+      .testimonial--lower { margin-top: 0; }
+      .alternatives__grid { flex-direction: column; align-items: center; }
+    }
+    @media (max-width: 768px) {
+      .container { padding: 0 var(--sp-6); }
+      .navbar__links,
+      .navbar__actions { display: none; }
+      .navbar__hamburger { display: flex; }
+
+      .hero__content { padding: 64px var(--sp-6) var(--sp-10); }
+      .hero__title { font-size: 28px; line-height: 36px; }
+
+      .webinar-info__split { flex-direction: column; align-items: center; }
+      .webinar-info__topics-wrap { padding: 0 var(--sp-4); }
+
+      .reviews__grid { padding: 0 var(--sp-6); }
+
+      .footer__grid { grid-template-columns: 1fr 1fr; gap: var(--sp-8); }
+      .footer__bottom { flex-direction: column; align-items: flex-start; }
+      .footer__legal { gap: var(--sp-4); }
+    }
+    @media (max-width: 480px) {
+      .hero__title { font-size: 24px; line-height: 32px; }
+      .t-h2 { font-size: 24px; line-height: 34px; }
+      .alternatives__sub { font-size: 18px; line-height: 28px; }
+      .footer__grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SKIP LINK (accessibility)
+       ═══════════════════════════════════════════════════════════ -->
+  <a href="#main-content"
+     style="position:absolute;left:-9999px;top:var(--sp-3);z-index:9999;background:var(--color-primary);color:#fff;padding:8px 16px;border-radius:var(--r-xs);font-weight:700;font-family:var(--font-body);text-decoration:none;"
+     onfocus="this.style.left='var(--sp-3)'"
+     onblur="this.style.left='-9999px'"
+  >Zum Hauptinhalt springen</a>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       NAVBAR
+       ═══════════════════════════════════════════════════════════ -->
+  <header role="banner">
+    <nav class="navbar" aria-label="Hauptnavigation">
+      <div class="navbar__inner">
+
+        <!-- Logo -->
+        <a href="https://www.escola.ch" class="navbar__logo" aria-label="Escola – Startseite">
+          <div class="navbar__logo-mark" aria-hidden="true">
+            <!-- Escola logomark (E-shape) -->
+            <svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M1 1h14v3H4v3.5h9v3H4V14h11v3H1V1z" fill="white" stroke="none"/>
+            </svg>
+          </div>
+          <span class="navbar__logo-text">Escola</span>
+        </a>
+
+        <!-- Desktop links -->
+        <ul class="navbar__links" role="list">
+          <li><a href="https://www.escola.ch/produkte"       class="navbar__link">Produkte</a></li>
+          <li><a href="https://www.escola.ch/unsere-schulen" class="navbar__link">Unsere Schulen</a></li>
+          <li><a href="https://www.escola.ch/ueber-uns"      class="navbar__link">Über uns</a></li>
+          <li><a href="https://www.escola.ch/blog"           class="navbar__link">Blog</a></li>
+          <li><a href="https://www.escola.ch/preise"         class="navbar__link">Preise</a></li>
+        </ul>
+
+        <!-- Desktop actions -->
+        <div class="navbar__actions">
+          <a href="https://app.escola.ch" class="navbar__login" aria-label="Im Escola-Portal anmelden">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <circle cx="8" cy="5.5" r="3" stroke="#0083DB" stroke-width="1.6"/>
+              <path d="M2.5 14c0-3.038 2.462-5.5 5.5-5.5s5.5 2.462 5.5 5.5" stroke="#0083DB" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+            Anmelden
+          </a>
+          <a href="#anmeldung" class="btn btn--primary">Zur Anmeldung</a>
+        </div>
+
+        <!-- Hamburger (mobile) -->
+        <button
+          class="navbar__hamburger"
+          aria-label="Menü öffnen"
+          aria-expanded="false"
+          aria-controls="mobile-nav"
+          id="hamburger-btn"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile nav drawer -->
+    <nav
+      class="mobile-nav"
+      id="mobile-nav"
+      aria-label="Mobilnavigation"
+      aria-hidden="true"
+    >
+      <a href="https://www.escola.ch/produkte"       class="mobile-nav__link">Produkte</a>
+      <a href="https://www.escola.ch/unsere-schulen" class="mobile-nav__link">Unsere Schulen</a>
+      <a href="https://www.escola.ch/ueber-uns"      class="mobile-nav__link">Über uns</a>
+      <a href="https://www.escola.ch/blog"           class="mobile-nav__link">Blog</a>
+      <a href="https://www.escola.ch/preise"         class="mobile-nav__link">Preise</a>
+      <a href="https://app.escola.ch"                class="mobile-nav__link">Anmelden</a>
+      <a href="#anmeldung" class="btn btn--primary mobile-nav__cta">Zur Anmeldung</a>
+    </nav>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       MAIN
+       ═══════════════════════════════════════════════════════════ -->
+  <main id="main-content">
+
+    <!-- ─────────────────────────────────────────────────────────
+         HERO
+         ───────────────────────────────────────────────────────── -->
+    <section class="hero" aria-label="Einleitung">
+
+      <!-- Left: text content -->
+      <div class="hero__content" data-animate>
+        <div class="hero__eyebrow" aria-hidden="true">
+          <div class="hero__eyebrow-dot"></div>
+          <span class="hero__eyebrow-text">Escola · Schulverwaltung</span>
+        </div>
+        <h1 class="hero__title">Digitale Verwaltung für&nbsp;Schulen</h1>
+        <p class="hero__body">
+          Die papierlose Schulverwaltung wird zum Standard. Mit Escola lassen sich die kantonalen und nationalen Anforderungen an eine moderne Verwaltung zuverlässig erfüllen&nbsp;– vom elektronischen Geschäftsverkehr bis zur digitalen Aktenführung.
+        </p>
+        <p class="hero__body">
+          In unserem kostenlosen Webinar zeigen wir euch, wie ihr eure Prozesse effizienter gestalten könnt.
+        </p>
+        <div class="hero__actions">
+          <a href="#anmeldung" class="btn btn--primary">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Zur Anmeldung
+          </a>
+          <a href="#webinar-infos" class="btn btn--outline">Webinar-Infos</a>
+        </div>
+      </div>
+
+      <!-- Right: illustration -->
+      <div class="hero__visual" aria-hidden="true">
+        <div class="hero__visual-inner">
+
+          <!-- Main hero illustration (Figma animated SVG — primary frame) -->
+          <picture>
+            <img
+              class="hero__illustration"
+              src="https://www.figma.com/api/mcp/asset/53b15157-6c55-430b-8d4d-a89c6e9a9f3b"
+              alt=""
+              loading="eager"
+              width="420"
+              height="360"
+            >
+          </picture>
+
+          <!-- Scribble decoration (Figma: "Background Gekritzel") -->
+          <img
+            class="hero__scribble"
+            src="https://www.figma.com/api/mcp/asset/201e6cfa-4a8e-4def-bd5f-47a925a17e32"
+            alt=""
+            loading="lazy"
+            width="180"
+            height="136"
+          >
+
+          <!-- Floating CTA (Figma: "schwebender Anmelde-Button") -->
+          <a href="#anmeldung" class="btn btn--primary hero__floating-btn" aria-label="Jetzt zum Webinar anmelden">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Zur Anmeldung
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────────────────────────────────────────────────
+         WEBINAR-INFOS
+         ───────────────────────────────────────────────────────── -->
+    <section class="webinar-info" id="webinar-infos" aria-label="Webinar-Informationen">
+      <div class="container">
+
+        <div class="webinar-info__head" data-animate>
+          <h2 class="t-h2">Webinar-Infos</h2>
+        </div>
+
+        <!-- Wann & Wie -->
+        <div class="webinar-info__split" data-animate-stagger>
+
+          <div class="webinar-info__col">
+            <h3 class="webinar-info__col-title">Wann</h3>
+            <div class="webinar-info__dates">
+              <p>Mittwoch, <strong>6. Mai, 14:00 Uhr</strong></p>
+              <p class="oder">oder</p>
+              <p>Dienstag, <strong>12. Mai, 10:00 Uhr</strong></p>
+            </div>
+          </div>
+
+          <div class="webinar-info__col">
+            <h3 class="webinar-info__col-title">Wie</h3>
+            <div class="webinar-info__dates">
+              <p>Format: Webinar</p>
+              <p>Dauer: 60 min</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Themen -->
+        <div class="webinar-info__topics-wrap" data-animate>
+          <h3 class="webinar-info__topics-title">Themen</h3>
+          <ul class="webinar-info__topics" role="list">
+            <li class="webinar-info__topic">Schüler:innen- und Personal-Dossier (inkl.&nbsp;BISTA)</li>
+            <li class="webinar-info__topic">Digitale Änderungsanträge</li>
+            <li class="webinar-info__topic">Personal-Abwesenheiten</li>
+            <li class="webinar-info__topic">
+              Standort- und Klasseneinteilung
+              <small>(neu mit Kriterieneinteilung)</small>
+            </li>
+            <li class="webinar-info__topic">Verwaltung der Schulangebote</li>
+            <li class="webinar-info__topic">
+              EWK-Schnittstelle
+              <small>(Ablösung von iCampus, Scolaris und CMI&nbsp;Schule)</small>
+            </li>
+            <li class="webinar-info__topic">
+              Dokumente digital signieren mit
+              <strong>Gastbeitrag</strong> von <strong>Deepsign</strong>
+            </li>
+            <li class="webinar-info__topic">Lebenszyklus der Dossiers bis zur Archivierung</li>
+            <li class="webinar-info__topic">Protokoll- und Geschäftsverwaltung</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ─────────────────────────────────────────────────────────
+         REVIEWS — SECTION 1
+         Background: Figma node 3499:3347 (wavy light-blue SVG)
+         ───────────────────────────────────────────────────────── -->
+    <section class="reviews" aria-label="Was unsere Kunden sagen">
+      <!-- Wavy background from Figma asset -->
+      <img
+        class="reviews__bg"
+        src="https://www.figma.com/api/mcp/asset/4b190450-1b7f-4e95-a542-50aefa5ab473"
+        alt=""
+        role="presentation"
+        loading="lazy"
+      >
+
+      <div class="reviews__grid">
+
+        <!-- Testimonial 1: Ariane Klein (left, higher) -->
+        <article class="testimonial" data-animate aria-label="Kundenstimme Ariane Klein">
+          <header class="testimonial__header">
+            <img
+              class="testimonial__avatar"
+              src="https://www.figma.com/api/mcp/asset/00fff577-985e-4237-b01a-49f5f239561a"
+              alt="Porträt Ariane Klein"
+              loading="lazy"
+              width="67"
+              height="67"
+            >
+            <div class="testimonial__meta">
+              <p class="testimonial__name">Ariane Klein</p>
+              <p class="testimonial__role">Leitung Schulverwaltung, Schule Rorbas-Freienstein-Teufen</p>
+            </div>
+          </header>
+          <blockquote class="testimonial__quote">
+            «Escola ist die erste Schulsoftware, die uns als Schulverwaltung komplett überzeugt. Die intuitive Bedienung und der schnelle, verlässliche Support begeistern uns. Escola entwickelt sich stetig weiter und setzt auch Veränderungen bei gesetzlichen Anforderungen zeitgerecht um. Durch die vielfältigen Module gelingt es uns, die internen Arbeitsabläufe zu optimieren und zu professionalisieren.»
+          </blockquote>
+        </article>
+
+        <!-- Testimonial 2: Iris Nievergelt (right, lower) -->
+        <article class="testimonial testimonial--lower" data-animate aria-label="Kundenstimme Iris Nievergelt">
+          <header class="testimonial__header">
+            <img
+              class="testimonial__avatar"
+              src="https://www.figma.com/api/mcp/asset/79ff5f32-bceb-4e0d-a865-08e4477f8949"
+              alt="Porträt Iris Nievergelt"
+              loading="lazy"
+              width="67"
+              height="67"
+            >
+            <div class="testimonial__meta">
+              <p class="testimonial__name">Iris Nievergelt</p>
+              <p class="testimonial__role">Administration schulergänzende Tagesstrukturen, Schule Stäfa</p>
+            </div>
+          </header>
+          <blockquote class="testimonial__quote">
+            «Escola erleichtert mir den Schulalltag enorm: Sei es beim Versand von Rechnungen und Vereinbarungen, die schnelle Verarbeitung von Schulangebote-Anmeldungen der Eltern oder der flexiblen Verwaltung von Dokumentvorlagen und Zugriffsrechten. Besonders schätze ich die intuitive Handhabung der Schulangebote, die einfache Rechnungsabwicklung sowie das zeitsparende Buchungsportal für Erziehungsberechtigte und die Schule.»
+          </blockquote>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ─────────────────────────────────────────────────────────
+         KEINE ZEIT FÜRS WEBINAR?
+         Figma: node 3065:4824 — bg #f0f8ff, 3 option cards
+         ───────────────────────────────────────────────────────── -->
+    <section class="alternatives" aria-label="Alternativen zum Webinar">
+      <div class="container">
+
+        <div class="alternatives__head" data-animate>
+          <h2 class="t-h2">Keine Zeit fürs Webinar?</h2>
+          <span class="alternatives__sub">So erfahrt ihr mehr über unsere digitale Schulverwaltung:</span>
+        </div>
+
+        <div class="alternatives__grid" data-animate-stagger>
+
+          <!-- Option 1: Escola-Website -->
+          <div class="alternatives__card">
+            <h3 class="alternatives__card-title">Escola-Website</h3>
+            <p class="alternatives__card-body">
+              Hier könnt ihr die verschiedenen Module und Funktionen für die Schulverwaltung kennenlernen:
+            </p>
+            <a
+              href="https://lab.escola.ch/verwaltung"
+              class="btn btn--outline"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Escola-Website besuchen (neues Tab)"
+            >
+              Escola-Website
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <path d="M1 11L11 1M11 1H4M11 1V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </div>
+
+          <!-- Option 2: Online-Präsentation -->
+          <div class="alternatives__card">
+            <h3 class="alternatives__card-title">Individuelle Online-Präsentation</h3>
+            <p class="alternatives__card-body">
+              Wir präsentieren euch die wichtigsten Funktionen und Module für eure Schulverwaltung individuell via Videochat:
+            </p>
+            <a
+              href="https://calendly.com/escola-schulsoftware/1h-digitale-schulverwaltung-online"
+              class="btn btn--outline"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Online-Präsentation buchen (neues Tab)"
+            >
+              Online-Präsentation buchen
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <path d="M1 11L11 1M11 1H4M11 1V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </div>
+
+          <!-- Option 3: Präsentation vor Ort -->
+          <div class="alternatives__card">
+            <h3 class="alternatives__card-title">Präsentation vor Ort</h3>
+            <p class="alternatives__card-body">
+              Oder bucht eine Präsentation vor Ort, in der wir euch persönlich beraten und eine individuelle Lösung für eure Schule ausarbeiten:
+            </p>
+            <a
+              href="https://calendly.com/escola-schulsoftware/2h-digitale-schulverwaltung-vor-ort"
+              class="btn btn--outline"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Präsentation vor Ort buchen (neues Tab)"
+            >
+              Präsentation vor Ort buchen
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <path d="M1 11L11 1M11 1H4M11 1V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────────────────────────────────────────────────
+         ANMELDUNG  (Figma node 3065:4977)
+         Airtable embed — replace the placeholder iframe src below
+         with your actual Airtable embed URL
+         ───────────────────────────────────────────────────────── -->
+    <section class="registration" id="anmeldung" aria-label="Webinar-Anmeldung">
+      <div class="registration__inner">
+
+        <h2 class="t-h2 registration__title" data-animate>Anmeldung</h2>
+
+        <div class="registration__form-area" data-animate>
+          <!--
+            TO EMBED AIRTABLE: replace the div below with:
+
+            <iframe
+              class="registration__embed"
+              src="https://airtable.com/embed/YOUR_FORM_KEY/YOUR_VIEW_KEY"
+              title="Webinar-Anmeldung"
+              loading="lazy"
+              allowfullscreen
+            ></iframe>
+          -->
+          <div class="registration__placeholder" aria-label="Anmeldeformular (Airtable wird hier eingebettet)">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+              <rect width="40" height="40" rx="8" fill="#E5E5E5"/>
+              <path d="M12 28V22l8-8 8 8v6H24v-6h-8v6H12z" fill="#999"/>
+            </svg>
+            <p class="registration__placeholder-label">Airtable-Anmeldeformular</p>
+            <p class="registration__placeholder-hint">
+              Ersetze dieses Element mit dem Airtable embed-Code.<br>
+              Kommentierter &lt;iframe&gt;-Stub im Quellcode vorhanden.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ─────────────────────────────────────────────────────────
+         REVIEWS — SECTION 2  (Figma node 3521:471 — flipped bg)
+         ───────────────────────────────────────────────────────── -->
+    <section class="reviews reviews--flipped" aria-label="Weitere Kundenstimmen">
+      <img
+        class="reviews__bg"
+        src="https://www.figma.com/api/mcp/asset/4b190450-1b7f-4e95-a542-50aefa5ab473"
+        alt=""
+        role="presentation"
+        loading="lazy"
+      >
+
+      <div class="reviews__grid">
+
+        <!-- Testimonial 3: Simone Augustin (right in Figma → left in DOM, higher) -->
+        <article class="testimonial" data-animate aria-label="Kundenstimme Simone Augustin">
+          <header class="testimonial__header">
+            <img
+              class="testimonial__avatar"
+              src="https://www.figma.com/api/mcp/asset/c94be197-0cc1-4a3f-b1ac-aaed585e6515"
+              alt="Porträt Simone Augustin"
+              loading="lazy"
+              width="67"
+              height="67"
+            >
+            <div class="testimonial__meta">
+              <p class="testimonial__name">Simone Augustin</p>
+              <p class="testimonial__role">Bereichsleiterin Bildung, Schule Horgen</p>
+            </div>
+          </header>
+          <blockquote class="testimonial__quote">
+            «Die Schüler- und Standortzuteilung – ein neues Modul von Escola – übertrifft bereits in der ersten Version alles bisher Gesehene und macht es uns als Schule mit rund 2500 Lernenden sehr viel einfacher, eine herausfordernde Aufgabe zu bewältigen. Die Möglichkeit, alle Schulangebote, von der Betreuung über den Schulbus bis hin zum Schulsport, zu integrieren, macht Escola für uns zur ersten Wahl.»
+          </blockquote>
+        </article>
+
+        <!-- Testimonial 4: Patrick Schmid (left in Figma → right in DOM, lower) -->
+        <article class="testimonial testimonial--lower" data-animate aria-label="Kundenstimme Patrick Schmid">
+          <header class="testimonial__header">
+            <img
+              class="testimonial__avatar"
+              src="https://www.figma.com/api/mcp/asset/c6dfb8a2-ea4c-443c-985b-bf19bfdae3ed"
+              alt="Porträt Patrick Schmid"
+              loading="lazy"
+              width="67"
+              height="67"
+            >
+            <div class="testimonial__meta">
+              <p class="testimonial__name">Patrick Schmid</p>
+              <p class="testimonial__role">Leiter Schulverwaltung, Sekundarschule Regensdorf Buchs Dällikon</p>
+            </div>
+          </header>
+          <blockquote class="testimonial__quote">
+            «Escola steht in unserer Schule bereits seit 2017 im Einsatz. Seit dem Schuljahr 2024/25 arbeiten wir ausschliesslich mit Escola, also ohne Schnittstelle zu einem anderen Schuladministrationstool. Dieser Schritt verlief problemlos, Escola vermag alle Anforderungen abzudecken. Ebenfalls arbeiten wir seit diesem Schuljahr mit dem Modul Anstellungen. Zusammen mit dem Modul Dokumentenvorlagen konnten wir die Abläufe im Personalwesen wesentlich effizienter gestalten.»
+          </blockquote>
+        </article>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       FOOTER
+       Completing Figma placeholder (node 3370:1937 — gray bg,
+       only "Footer" text). Using full Escola blue footer pattern
+       sourced from escola.ch reference pages.
+       ═══════════════════════════════════════════════════════════ -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer__inner">
+
+      <div class="footer__grid">
+
+        <!-- Column 1: Company -->
+        <div>
+          <div class="footer__logo">
+            <div class="footer__logo-mark" aria-hidden="true">
+              <svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M1 1h14v3H4v3.5h9v3H4V14h11v3H1V1z" fill="white"/>
+              </svg>
+            </div>
+            <span class="footer__logo-text">Escola</span>
+          </div>
+          <address class="footer__address" style="font-style:normal;">
+            Escola GmbH<br>
+            Beckenhofstrasse 72, 1.&nbsp;OG<br>
+            CH-8006 Zürich
+          </address>
+          <p class="footer__address" style="margin-top:10px;">
+            Mo&nbsp;bis&nbsp;Fr, 08:00&nbsp;–&nbsp;17:00&nbsp;Uhr
+          </p>
+          <div class="footer__contact">
+            <a href="tel:+41445001090" class="footer__contact-link">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M2 2h4l1.5 3.5L5.5 7c1 2 3 4 5 5l1.5-2L15 11.5V14a1 1 0 01-1 1C5.6 15 1 9.4 1 3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.4"/>
+              </svg>
+              +41 44 500 10 90
+            </a>
+            <a href="mailto:info@escola.ch" class="footer__contact-link">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <rect x="1" y="3" width="14" height="10" rx="1.5" stroke="currentColor" stroke-width="1.4"/>
+                <path d="M1 4.5l7 5 7-5" stroke="currentColor" stroke-width="1.4"/>
+              </svg>
+              info@escola.ch
+            </a>
+          </div>
+          <!-- Social -->
+          <div class="footer__social" role="list" aria-label="Escola auf Social Media">
+            <a href="https://www.facebook.com/escola.ch" class="footer__social-link" target="_blank" rel="noopener noreferrer" aria-label="Facebook" role="listitem">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/escola.ch" class="footer__social-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram" role="listitem">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <a href="https://twitter.com/escola_ch" class="footer__social-link" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X" role="listitem">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/company/escola-gmbh" class="footer__social-link" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" role="listitem">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="https://www.youtube.com/@escola_ch" class="footer__social-link" target="_blank" rel="noopener noreferrer" aria-label="YouTube" role="listitem">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.58C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Column 2: Produkte -->
+        <nav aria-label="Schulverwaltungsprodukte">
+          <p class="footer__col-title">Produkte</p>
+          <ul class="footer__links" role="list">
+            <li><a href="https://www.escola.ch/schulmanager"  class="footer__link">Schulmanager</a></li>
+            <li><a href="https://www.escola.ch/foerderplanung" class="footer__link">Förderplanung</a></li>
+            <li><a href="https://www.escola.ch/schulangebote" class="footer__link">Schulangebote</a></li>
+            <li><a href="https://www.escola.ch/webauftritt"   class="footer__link">Webauftritt</a></li>
+            <li><a href="https://www.escola.ch/lernwelt"      class="footer__link">Lernwelt</a></li>
+            <li><a href="https://www.escola.ch/app"           class="footer__link">Escola App</a></li>
+          </ul>
+        </nav>
+
+        <!-- Column 3: Über uns -->
+        <nav aria-label="Über Escola">
+          <p class="footer__col-title">Über uns</p>
+          <ul class="footer__links" role="list">
+            <li><a href="https://www.escola.ch/unsere-schulen"  class="footer__link">Unsere Schulen</a></li>
+            <li><a href="https://www.escola.ch/kundenmeinungen" class="footer__link">Kundenmeinungen</a></li>
+            <li><a href="https://www.escola.ch/team"            class="footer__link">Team</a></li>
+            <li><a href="https://www.escola.ch/blog"            class="footer__link">Blog</a></li>
+            <li><a href="https://www.escola.ch/updates"         class="footer__link">Updates</a></li>
+            <li><a href="https://www.escola.ch/events"          class="footer__link">Events</a></li>
+            <li><a href="https://www.escola.ch/jobs"            class="footer__link">Jobs</a></li>
+            <li><a href="https://www.escola.ch/preise"          class="footer__link">Preise</a></li>
+          </ul>
+        </nav>
+
+        <!-- Column 4: Aktionen + Hilfe -->
+        <div>
+          <p class="footer__col-title">Aktionen</p>
+          <ul class="footer__links" role="list" style="margin-bottom:24px;">
+            <li><a href="https://www.escola.ch/#testzugang"        class="footer__link">Testzugang anfordern</a></li>
+            <li><a href="https://calendly.com/escola-schulsoftware" class="footer__link">Präsentation buchen</a></li>
+            <li><a href="https://www.escola.ch/#rueckruf"          class="footer__link">Rückruftermin vereinbaren</a></li>
+          </ul>
+          <p class="footer__col-title">Hilfe</p>
+          <ul class="footer__links" role="list">
+            <li><a href="https://app.escola.ch"   class="footer__link">Login Escola</a></li>
+            <li><a href="https://help.escola.ch"  class="footer__link">Lernportal &amp; FAQs</a></li>
+            <li><a href="https://status.escola.ch" class="footer__link">Serverstatus</a></li>
+          </ul>
+        </div>
+
+      </div><!-- /.footer__grid -->
+
+      <!-- Bottom bar -->
+      <div class="footer__bottom">
+        <span class="footer__copyright">© 2026 Escola GmbH</span>
+        <ul class="footer__legal" role="list">
+          <li><a href="https://www.escola.ch/datenschutz-webseite" class="footer__legal-link">Datenschutzerklärung</a></li>
+          <li><a href="https://www.escola.ch/agb"                  class="footer__legal-link">AGB</a></li>
+          <li><a href="https://www.escola.ch/impressum"            class="footer__legal-link">Impressum</a></li>
+        </ul>
+        <span class="footer__swiss" aria-label="Swiss made software">
+          <!-- Swiss flag icon -->
+          <svg width="18" height="13" viewBox="0 0 18 13" fill="none" aria-hidden="true">
+            <rect width="18" height="13" rx="1.5" fill="#CC0000"/>
+            <rect x="7.5" y="2.5" width="3" height="8" rx="0.5" fill="white"/>
+            <rect x="3.5" y="5" width="11" height="3" rx="0.5" fill="white"/>
+          </svg>
+          Swiss made software
+        </span>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       JAVASCRIPT
+       ═══════════════════════════════════════════════════════════ -->
+  <script>
+    'use strict';
+
+    /* ──────────────────────────────────────────
+       MOBILE NAV
+       ────────────────────────────────────────── */
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const mobileNav    = document.getElementById('mobile-nav');
+
+    function toggleMobileNav(forceClose = false) {
+      const isOpen = !forceClose && !mobileNav.classList.contains('is-open');
+      mobileNav.classList.toggle('is-open', isOpen);
+      hamburgerBtn.setAttribute('aria-expanded', isOpen);
+      mobileNav.setAttribute('aria-hidden', !isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    }
+
+    hamburgerBtn.addEventListener('click', () => toggleMobileNav());
+
+    mobileNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => toggleMobileNav(true));
+    });
+
+    // Close on Escape
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && mobileNav.classList.contains('is-open')) {
+        toggleMobileNav(true);
+        hamburgerBtn.focus();
+      }
+    });
+
+    /* ──────────────────────────────────────────
+       SCROLL-REVEAL  (IntersectionObserver)
+       ────────────────────────────────────────── */
+    if ('IntersectionObserver' in window) {
+      const revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              revealObserver.unobserve(entry.target); // fire once
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+      );
+
+      document.querySelectorAll('[data-animate], [data-animate-stagger]').forEach(el => {
+        revealObserver.observe(el);
+      });
+    } else {
+      // Fallback: show everything immediately for older browsers
+      document.querySelectorAll('[data-animate], [data-animate-stagger]').forEach(el => {
+        el.classList.add('is-visible');
+      });
+    }
+
+    /* ──────────────────────────────────────────
+       SMOOTH SCROLL for anchor links
+       ────────────────────────────────────────── */
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const href   = this.getAttribute('href');
+        const target = document.querySelector(href);
+        if (!target) return;
+        e.preventDefault();
+        const navH   = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h'), 10) || 80;
+        const top    = target.getBoundingClientRect().top + window.scrollY - navH - 16;
+        window.scrollTo({ top, behavior: 'smooth' });
+        // Update URL without triggering scroll
+        history.pushState(null, '', href);
+      });
+    });
+
+    /* ──────────────────────────────────────────
+       NAVBAR shadow intensity on scroll
+       ────────────────────────────────────────── */
+    const navbar = document.querySelector('.navbar');
+    const onScroll = () => {
+      const scrolled = window.scrollY > 20;
+      navbar.style.boxShadow = scrolled
+        ? '0 5px 50px 0 rgba(0,0,0,0.18)'
+        : '0 5px 50px 0 rgba(0,0,0,0.10)';
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll(); // run once on load
+  </script>
+
+</body>
+</html>

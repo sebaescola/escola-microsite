@@ -1,0 +1,199 @@
+/**
+ * Escola Design Tokens
+ * Extracted from escola.ch/digitale-verwaltung + escola.ch/zurich-event.php
+ * Source truth: /css/escola-page.css (queried 2026-04-08)
+ *
+ * Font families are self-hosted at escola.ch/fonts/
+ * Icons via Font Awesome Pro 6.5.1 (self-hosted)
+ */
+
+/* ─────────────────────────────────────────────
+   Font imports  (reference — escola hosts locally)
+   ───────────────────────────────────────────── */
+/*
+  Gotham Rounded  →  escola.ch/fonts/GothamRounded-{Light|Book|Medium|Bold}{Italic?}.otf
+  Nunito          →  escola.ch/fonts/nunito/nunito-{regular|medium|semi-bold|bold}.woff2
+  Font Awesome Pro 6.5.1 → escola.ch/fonts/fontawesome/6.5.1/css/all.css
+*/
+
+/* Fallback Google Fonts import for environments without the self-hosted files */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* ───────────────────────────────────────────
+     COLOURS
+     ─────────────────────────────────────────── */
+
+  /* Brand blues */
+  --color-primary:          #0083DB;   /* primary buttons, links, h4, accent */
+  --color-primary-dark:     #006CB5;   /* button hover */
+  --color-primary-mid:      #007FE7;   /* button-2, secondary CTA */
+  --color-primary-light:    #009DDB;   /* lighter accent */
+  --color-light-blue:       #A8DCFF;   /* footer link colour, light accent text */
+  --color-card-bg:          #EAF7FF;   /* card default background */
+  --color-card-bg-hover:    #B7DAF1;   /* card hover background */
+
+  /* Footer / dark sections */
+  --color-footer-bg:        #0083DB;   /* footer background = primary blue */
+
+  /* Text */
+  --color-text:             #333333;   /* body text, nav links */
+  --color-text-dark:        #000000;   /* modal title, max contrast */
+  --color-text-medium:      #494949;   /* paragraph text */
+  --color-text-muted:       #5E5E5E;   /* labels, secondary text */
+  --color-text-on-dark:     #FFFFFF;   /* text on blue/dark backgrounds */
+
+  /* Backgrounds */
+  --color-bg:               #FFFFFF;
+  --color-bg-section:       #F2F2F2;   /* alternate section bg */
+  --color-bg-overlay:       rgba(0, 0, 0, 0.5);  /* modal backdrop */
+
+  /* Borders */
+  --color-border:           #C2C2C2;   /* input borders */
+  --color-border-light:     #D6D6D6;   /* button outlines */
+  --color-border-divider:   #EEEEEE;   /* section dividers, modal header border */
+
+  /* Feedback */
+  --color-error:            #FE5F55;
+  --color-error-bg:         #FCE5E5;
+
+  /* Product accent colours */
+  --color-schulmanager:     #FF8483;
+  --color-foerderplanung:   #65CFCE;
+  --color-webauftritt:      #DC87C4;
+  --color-lernwelt:         #938EDF;
+  --color-schulangebote:    #E0A025;
+  --color-app:              #1B77D1;
+
+  /* Product tint backgrounds (10% opacity) */
+  --color-schulmanager-tint:   rgba(255, 132, 131, 0.10);
+  --color-foerderplanung-tint: rgba(101, 207, 206, 0.10);
+  --color-webauftritt-tint:    rgba(220, 135, 196, 0.10);
+  --color-lernwelt-tint:       rgba(147, 142, 223, 0.10);
+  --color-schulangebote-tint:  rgba(224, 160,  37, 0.10);
+  --color-app-tint:            rgba( 27, 119, 209, 0.10);
+
+  /* ───────────────────────────────────────────
+     TYPOGRAPHY
+     ─────────────────────────────────────────── */
+
+  /* Families */
+  --font-display:  'Gothamrounded', 'Nunito', sans-serif;  /* headings (self-hosted OTF) */
+  --font-body:     'Nunito', sans-serif;                   /* everything else */
+
+  /* Scale (desktop) */
+  --font-size-xs:    11px;   /* form labels */
+  --font-size-sm:    14px;   /* body base, inputs (.9rem) */
+  --font-size-base:  15px;   /* footer links, small UI text */
+  --font-size-md:    16px;   /* buttons (uppercase) */
+  --font-size-lg:    18px;   /* nav links, paragraph text, h4/h5 */
+  --font-size-xl:    20px;   /* modal titles on mobile, checkbox labels */
+  --font-size-2xl:   24px;   /* h3, modal title */
+  --font-size-3xl:   38px;   /* h1, h2 */
+  --font-size-hero:  56px;   /* hero paragraph / hero headline */
+
+  /* Line heights */
+  --line-height-tight:  1.2;     /* 120% — headings */
+  --line-height-snug:   1.3;     /* 130% */
+  --line-height-base:   1.4;     /* 140% — body paragraphs */
+  --line-height-loose:  1.5;     /* 150% — form inputs */
+  --line-height-h1:    44px;
+  --line-height-h2:    40px;
+  --line-height-h3:    30px;
+  --line-height-hero:  72px;
+
+  /* Weights */
+  --font-weight-light:      300;
+  --font-weight-regular:    400;
+  --font-weight-medium:     500;
+  --font-weight-semibold:   600;
+  --font-weight-bold:       700;
+
+  /* Letter spacing */
+  --letter-spacing-tight:   0.01em;   /* 1% — modal body text */
+  --letter-spacing-base:    0.03em;   /* 3% — footer button text */
+  --letter-spacing-nav:     0.8px;    /* nav links */
+  --letter-spacing-h2:      1px;      /* h2 */
+  --letter-spacing-h4:      1.2px;    /* h4 */
+  --letter-spacing-btn:     4px;      /* primary button (uppercase) */
+  --letter-spacing-body:    0.3px;    /* paragraph */
+
+  /* ───────────────────────────────────────────
+     SPACING  (4px base unit)
+     ─────────────────────────────────────────── */
+
+  --space-1:   4px;
+  --space-2:   8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-15: 60px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+  --space-section:      80px;  /* standard section vertical padding */
+  --space-section-top: 100px;  /* first section (accounts for fixed nav) */
+  --nav-height:         80px;
+
+  /* ───────────────────────────────────────────
+     BORDERS & RADIUS
+     ─────────────────────────────────────────── */
+
+  --radius-xs:   3px;   /* footer button */
+  --radius-sm:   4px;   /* inputs, small buttons */
+  --radius-md:   5px;   /* register-btn */
+  --radius-lg:   8px;   /* primary buttons, cards */
+  --radius-modal: 0.3rem;  /* bootstrap-style modal (~4.8px) */
+  --radius-pill: 9999px;
+
+  /* ───────────────────────────────────────────
+     SHADOWS
+     ─────────────────────────────────────────── */
+
+  --shadow-nav:       0 0 40px 0 rgba(20, 20, 20, 0.10);   /* fixed navbar */
+  --shadow-btn:       0 16px 40px -23px #000;               /* primary button */
+  --shadow-card:      0 37px 90px -55px rgba(0, 0, 0, 0.60);  /* card hover */
+  --shadow-card-active: 0 28px 36px -35px rgba(0, 0, 0, 0.60);
+  --shadow-footer-btn: 0 0 0 0 rgba(0, 0, 0, 0.10), inset 0 0 0 1px rgba(0, 0, 0, 0.20);
+  --shadow-sm:        0 2px 8px rgba(0, 0, 0, 0.08);
+
+  /* ───────────────────────────────────────────
+     MOTION
+     ─────────────────────────────────────────── */
+
+  --duration-fast:   200ms;
+  --duration-base:   300ms;
+  --duration-slow:   400ms;
+  --duration-enter:  500ms;
+
+  /* Easing */
+  --ease-out:     ease;                              /* most transitions */
+  --ease-in-out:  cubic-bezier(0.645, 0.045, 0.355, 1);  /* nav, links — ease-in-out cubic */
+  --ease-button:  cubic-bezier(0.455, 0.030, 0.515, 0.955);  /* button transform */
+  --ease-spring:  cubic-bezier(0.175, 0.885, 0.320, 1.275);  /* spring-like pop */
+
+  /* ───────────────────────────────────────────
+     LAYOUT
+     ─────────────────────────────────────────── */
+
+  --max-width-container:  1300px;
+  --max-width-nav:        1260px;
+  --max-width-narrow:     1000px;
+  --max-width-modal:       766px;
+  --max-width-text:        884px;   /* hero paragraph max-width */
+
+  /* Grid */
+  --grid-cols-desktop: 12;
+  --grid-gutter:       16px;
+
+  /* Breakpoints (reference — use in @media queries) */
+  /* --bp-sm:   443px  */
+  /* --bp-md:   667px  */
+  /* --bp-lg:   991px  */
+  /* --bp-xl:   992px  */
+  /* --bp-2xl: 1440px  */
+}
